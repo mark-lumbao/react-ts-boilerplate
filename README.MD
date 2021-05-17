@@ -155,7 +155,82 @@
       document.getElementById('root'),
     );
     ```
-8. Finally `npm run start:dev` command for development mode or `npm run build` for building production mode.
+8. Setup and Configure ESLint
+    ```
+    npm i -D eslint
+    npx eslint --init
+    ```
+    ![eslint-screenshot](assets/eslint-choices.png)
+
+    Add the following script in the rules section of your **.eslint.js**
+    ```
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
+    'no-console': [
+      1,
+      {
+        allow: [
+          'error',
+        ],
+      },
+    ],
+    'import/no-extraneous-dependencies': [
+      2,
+      {
+        devDependencies: true,
+      },
+    ],
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: [
+          '.js',
+          '.ts',
+          '.tsx',
+        ],
+      },
+    ],
+    'import/no-anonymous-default-export': [
+      'error',
+      {
+        allowArray: true,
+        allowArrowFunction: false,
+        allowAnonymousClass: false,
+        allowAnonymousFunction: false,
+        allowCallExpression: true,
+        allowLiteral: false,
+        allowObject: false,
+      },
+    ],
+    'import/extensions': [
+      2,
+      'ignorePackages',
+      {
+        js: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'import/no-self-import': 0,
+    'react/jsx-fragments': [
+      2,
+      'element',
+    ],
+    'react/no-array-index-key': 0,
+    'react/jsx-props-no-spreading': 0,
+    '@typescript-eslint/no-unused-vars': [
+      2,
+      {
+        args: 'none',
+      },
+    ],
+    'no-useless-constructor': 0,
+    'no-await-in-loop': 'off',
+    '@typescript-eslint/no-useless-constructor': 'error',
+    ```
+9. Finally `npm run start:dev` command for development mode or `npm run build` for building production mode.
 
 
 ## Help
