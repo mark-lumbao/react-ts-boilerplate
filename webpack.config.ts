@@ -13,7 +13,7 @@ const babelOptions = ({
 const devServer = ({
   contentBase: `${__dirname}/public`,
   compress: true,
-  publicPath: '/dist/',
+  publicPath: 'public',
   port: process.env.PORT || 1234,
   writeToDisk: true,
   historyApiFallback: true,
@@ -42,13 +42,18 @@ const config: Configuration & { devServer: typeof devServer } = ({
       {
         test: /\.(sc|c)ss$/,
         use: [
-          'css-loader',
           'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
     ],
   },
   resolve: {
+    modules: [
+      'node_modules',
+      'src',
+    ],
     extensions: ['.ts', '.tsx', '.js', ',jsx'],
   },
   plugins: [
