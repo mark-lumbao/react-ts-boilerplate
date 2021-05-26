@@ -1,19 +1,7 @@
-import React, { CSSProperties } from 'react';
-
-const style: CSSProperties = ({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: 'teal',
-});
+import React from 'react';
 
 const App = () => (
-  <main style={style}>
+  <main>
     <h1>
       This is a
       &nbsp;
