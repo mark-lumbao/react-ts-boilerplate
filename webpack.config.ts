@@ -2,14 +2,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { Configuration } from 'webpack';
 
-const babelOptions = ({
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-react',
-    '@babel/preset-typescript',
-  ],
-});
-
 const devServer = ({
   contentBase: `${__dirname}/public`,
   compress: true,
@@ -37,7 +29,6 @@ const config: Configuration & { devServer: typeof devServer } = ({
         test: /\.(ts|js)x?/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: babelOptions,
       },
       {
         test: /\.(sc|c)ss$/,

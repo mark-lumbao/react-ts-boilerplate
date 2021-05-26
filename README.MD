@@ -4,13 +4,13 @@
 ## ToDoS:
 
 1. Initialize npm then install react and react-dom
-    ```
+    ```bash
     npm init -y
     npm i react react-dom
     npm i -D @types/react @types/react-dom typescript
     ```
 2. Initialize git and configure **.gitignore**
-    ```
+    ```bash
     git init
     ```
     ***gitignore content:***
@@ -31,23 +31,23 @@
     ```
 4. Setup Webpack
     * Prerequisites
-      ```
+      ```bash
       npm i -D webpack webpack-cli ts-node @types/node @types/webpack webpack-dev-server tsconfig-paths cross-env
       ```
     * Babel
-      ```
+      ```bash
       npm i -D @babel/core @babel/preset-env @babel/preset-typescript @babel/preset-react
       ```
     * Loaders
-      ```
-      npm i -D babel-loader css-loader style-loader
+      ```bash
+      npm i -D babel-loader css-loader style-loader sass-loader sass
       ```
     * Plugins
-      ```
+      ```bash
       npm i -D html-webpack-plugin clean-webpack-plugin
       ```
     * Create **webpack-tsconfig.json** file
-      ```
+      ```json
       {
         "compilerOptions": {
           "module": "commonjs",
@@ -56,23 +56,26 @@
         }
       }
       ```
-    * Create **webpack-config.ts** file
+    * Create **.babelrc** file
+      ```json
+      {
+        "presets": [
+          "@babel/preset-env",
+          "@babel/preset-react",
+          "@babel/preset-typescript"
+        ]
+      }
       ```
+    * Create **webpack-config.ts** file
+      ```ts
       import HtmlWebpackPlugin from 'html-webpack-plugin';
+      import { CleanWebpackPlugin } from 'clean-webpack-plugin';
       import { Configuration } from 'webpack';
-
-      const babelOptions = ({
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-typescript',
-        ],
-      })
 
       const devServer = ({
         contentBase: `${__dirname}/public`,
         compress: true,
-        publicPath: '/dist/',
+        publicPath: 'public',
         port: process.env.PORT || 1234,
         writeToDisk: true,
         historyApiFallback: true,
@@ -88,7 +91,7 @@
         output: {
           path: `${__dirname}/public`,
           filename: '[id][hash].js',
-          chunkFilename: '[chunkhash].js'
+          chunkFilename: '[chunkhash].js',
         },
         module: {
           rules: [
@@ -96,18 +99,22 @@
               test: /\.(ts|js)x?/,
               exclude: /node_modules/,
               loader: 'babel-loader',
-              options: babelOptions,
             },
             {
               test: /\.(sc|c)ss$/,
               use: [
-                'css-loader',
                 'style-loader',
+                'css-loader',
+                'sass-loader',
               ],
-            }
+            },
           ],
         },
         resolve: {
+          modules: [
+            'node_modules',
+            'src',
+          ],
           extensions: ['.ts', '.tsx', '.js', ',jsx'],
         },
         plugins: [
@@ -124,14 +131,14 @@
       export default config;
       ```
 5. Add Build and Development Starter scripts in **package.json**
-    ```
+    ```json
     "scripts": {
       "build": "cross-env TS_NODE_PROJECT=\"webpack-tsconfig.json\" webpack --mode production",
       "start:dev": "cross-env TS_NODE_PROJECT=\"webpack-tsconfig.json\" webpack serve --hot --progress --mode development"
     },
     ```
 6. Create your webpack template file: **src/template.html**
-    ```
+    ```html
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -146,7 +153,7 @@
     </html>
     ```
 7. Create your app root file: **src/index.tsx**
-    ```
+    ```tsx
     import React from 'react';
     import { render } from 'react-dom';
 
@@ -156,14 +163,14 @@
     );
     ```
 8. Setup and Configure ESLint
-    ```
+    ```bash
     npm i -D eslint
     npx eslint --init
     ```
     ![eslint-screenshot](assets/eslint-choices.png)
 
     Add the following script in the rules section of your **.eslint.js**
-    ```
+    ```js
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'no-use-before-define': 'off',
@@ -229,6 +236,24 @@
     'no-useless-constructor': 0,
     'no-await-in-loop': 'off',
     '@typescript-eslint/no-useless-constructor': 'error',
+    ```
+    Don't forget to add the settings section of your **.eslint.js** for module resolution.
+    ```js
+    settings: {
+      'import/resolver': {
+        node: {
+          moduleDirectory: [
+            'src/',
+            'node_modules',
+          ],
+          extensions: [
+            '.js',
+            '.ts',
+            '.tsx',
+          ],
+        },
+      },
+    },
     ```
 9. Finally `npm run start:dev` command for development mode or `npm run build` for building production mode.
 
