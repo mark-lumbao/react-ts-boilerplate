@@ -19,6 +19,21 @@ module.exports = {
     'react',
     '@typescript-eslint',
   ],
+  settings: {
+    'import/resolver': {
+      node: {
+        moduleDirectory: [
+          'src/',
+          'node_modules',
+        ],
+        extensions: [
+          '.js',
+          '.ts',
+          '.tsx',
+        ],
+      },
+    },
+  },
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',

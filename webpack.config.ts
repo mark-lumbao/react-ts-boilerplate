@@ -8,7 +8,7 @@ const babelOptions = ({
     '@babel/preset-react',
     '@babel/preset-typescript',
   ],
-})
+});
 
 const devServer = ({
   contentBase: `${__dirname}/public`,
@@ -29,7 +29,7 @@ const config: Configuration & { devServer: typeof devServer } = ({
   output: {
     path: `${__dirname}/public`,
     filename: '[id][hash].js',
-    chunkFilename: '[chunkhash].js'
+    chunkFilename: '[chunkhash].js',
   },
   module: {
     rules: [
@@ -45,7 +45,7 @@ const config: Configuration & { devServer: typeof devServer } = ({
           'css-loader',
           'style-loader',
         ],
-      }
+      },
     ],
   },
   resolve: {

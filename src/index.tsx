@@ -1,7 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './app';
+import './scss/main.scss';
 
 render(
-  <div>React TS</div>,
+  <App />,
   document.getElementById('root'),
 );
