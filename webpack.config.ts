@@ -38,6 +38,10 @@ const config: Configuration & { devServer: typeof devServer } = ({
           'sass-loader',
         ],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|svg)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {

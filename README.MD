@@ -162,6 +162,17 @@
       document.getElementById('root'),
     );
     ```
+    By the way if you're planning to import static files like an image create this file:
+    ```ts
+    // declaration.d.ts
+    declare module '*.jpg';
+    declare module '*.jpeg';
+    declare module '*.png';
+    declare module '*.svg';
+    declare module '*.mp4';
+    declare module '*.gif';
+    declare module '*.pdf';
+    ```
 8. Setup and Configure ESLint
     ```bash
     npm i -D eslint
