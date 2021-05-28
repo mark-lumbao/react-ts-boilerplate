@@ -108,6 +108,10 @@
                 'sass-loader',
               ],
             },
+            {
+              test: /\.(png|svg|jpg|jpeg|gif|svg)$/,
+              type: 'asset/resource',
+            },
           ],
         },
         resolve: {
