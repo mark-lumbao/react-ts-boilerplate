@@ -4,7 +4,7 @@
     "target": "es2017",
     "module": "esnext",
     "sourceMap": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
@@ -18,7 +18,7 @@
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "declaration": true,
+    "declaration": true
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist", "**/*spec.ts", "**/*test.ts"]
