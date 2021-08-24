@@ -1,4 +1,6 @@
-const App = () => (
+import { ReactElement } from 'react';
+
+const App = (): ReactElement => (
   <main>
     <h1>
       This is a

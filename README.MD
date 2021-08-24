@@ -18,16 +18,30 @@
     node_modules
     public
     ```
-3. Setup recommended src folders
-    ```
-    src
-      - app           // not present in my code
-      - assets        // not present in my code
-      - components    // not present in my code
-      - containers    // not present in my code
-      - providers     // not present in my code
-      - index.tsx     // webpack entry
-      - template.html // html-webpack-plugin template
+3. Add your tsconfig.json or create your own using `npx tsc --init`
+    ```json
+    {
+      "compilerOptions": {
+        "baseUrl": "src",
+        "target": "es2017",
+        "module": "esnext",
+        "sourceMap": true,
+        "jsx": "react-jsx",
+        "strict": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "lib": ["dom","esnext"],
+        "resolveJsonModule": true,
+        "importHelpers": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "declaration": true
+      },
+      "include": ["**/*"],
+      "exclude": ["node_modules", "public", "**/*spec.ts", "**/*test.ts"]
+    }
     ```
 4. Setup Webpack
     * Prerequisites
@@ -90,13 +104,13 @@
         entry: `${__dirname}/src/index.tsx`,
         output: {
           path: `${__dirname}/public`,
-          filename: '[id][hash].js',
+          filename: '[fullhash].js',
           chunkFilename: '[chunkhash].js',
         },
         module: {
           rules: [
             {
-              test: /\.(ts|js)x?/,
+              test: /\.(ts|js)x?$/,
               exclude: /node_modules/,
               loader: 'babel-loader',
             },
@@ -109,7 +123,7 @@
               ],
             },
             {
-              test: /\.(png|svg|jpg|jpeg|gif|svg)$/,
+              test: /\.(png|svg|jpg|jpeg|gif)$/,
               type: 'asset/resource',
             },
           ],
@@ -119,7 +133,7 @@
             'node_modules',
             'src',
           ],
-          extensions: ['.ts', '.tsx', '.js', ',jsx'],
+          extensions: ['.ts', '.tsx', '.js', '.jsx'],
         },
         plugins: [
           new HtmlWebpackPlugin({
@@ -137,7 +151,7 @@
 5. Add Build and Development Starter scripts in **package.json**
     ```json
     "scripts": {
-      "build": "cross-env TS_NODE_PROJECT=\"webpack-tsconfig.json\" webpack --mode production",
+      "build": "cross-env TS_NODE_PROJECT=\"webpack-tsconfig.json\" webpack --progress --mode production",
       "start:dev": "cross-env TS_NODE_PROJECT=\"webpack-tsconfig.json\" webpack serve --hot --progress --mode development"
     },
     ```
@@ -158,7 +172,6 @@
     ```
 7. Create your app root file: **src/index.tsx**
     ```tsx
-    import React from 'react';
     import { render } from 'react-dom';
 
     render(

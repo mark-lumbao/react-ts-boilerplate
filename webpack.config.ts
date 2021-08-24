@@ -20,13 +20,13 @@ const config: Configuration & { devServer: typeof devServer } = ({
   entry: `${__dirname}/src/index.tsx`,
   output: {
     path: `${__dirname}/public`,
-    filename: '[id][hash].js',
+    filename: '[fullhash].js',
     chunkFilename: '[chunkhash].js',
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
@@ -39,7 +39,7 @@ const config: Configuration & { devServer: typeof devServer } = ({
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|svg)$/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
       },
     ],
@@ -49,7 +49,7 @@ const config: Configuration & { devServer: typeof devServer } = ({
       'node_modules',
       'src',
     ],
-    extensions: ['.ts', '.tsx', '.js', ',jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({

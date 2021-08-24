@@ -4,9 +4,10 @@
   "description": "React Typescript Boilerplate Project",
   "main": "index.js",
   "scripts": {
-    "analyze": "env-cmd webpack --mode production --analyze",
-    "build": "env-cmd webpack --mode production",
-    "start:dev": "env-cmd webpack serve --hot --progress --mode development",
+    "start": "npm run build && serve -s -n public",
+    "start:dev": "cross-env TS_NODE_PROJECT=webpack-tsconfig.json webpack serve --hot --progress --mode development",
+    "analyze": "cross-env TS_NODE_PROJECT=webpack-tsconfig.json webpack --mode production --analyze",
+    "build": "cross-env TS_NODE_PROJECT=webpack-tsconfig.json webpack --progress --mode production",
     "test": "jest --verbose --colors"
   },
   "keywords": [
@@ -17,9 +18,9 @@
   "author": "Mark Anthony Lumbao",
   "license": "ISC",
   "dependencies": {
-    "jest-transform-stub": "^2.0.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "serve": "^12.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -37,8 +38,8 @@
     "babel-jest": "^27.0.5",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
-    "env-cmd": "^10.1.0",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
@@ -47,6 +48,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.0.5",
+    "jest-transform-stub": "^2.0.0",
     "react-test-renderer": "^17.0.2",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
